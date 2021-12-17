@@ -18,7 +18,7 @@ gottbert.eval()  # disable dropout (or leave in train mode to finetune)
 ```python
 # Download gottbert model
 wget https://dl.gottbert.de/fairseq/models/gottbert-base.tar.gz
-tar -xzvf gottbert.tar.gz
+tar -xzvf gottbert-base.tar.gz
 
 # Load the model in fairseq
 from fairseq.models.roberta import GottbertModel
