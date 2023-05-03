@@ -390,14 +390,18 @@ def call_main(cfg: FairseqConfig, main, **kwargs):
     elif cfg.common.tpu and cfg.distributed_training.distributed_world_size > 1:
         import torch_xla.distributed.xla_multiprocessing as xmp
 
+        n_cores=8
+        if os.environ.get("TPUv4"):
+            n_cores=4
+
         torch.multiprocessing.set_sharing_strategy("file_system")
         xmp.spawn(
             fn=distributed_main,
             args=(main, cfg, kwargs),
             # tpu-comment:
-            #   8 devices in one TPU VM, is the max processes to be spawned.
+            #   4/8 devices in one TPU VM, is the max processes to be spawned.
             #   The rest is driven by xm.distributed.xla_dist
-            nprocs=min(cfg.distributed_training.distributed_world_size, 8),
+            nprocs=min(cfg.distributed_training.distributed_world_size, n_cores),
         )
     else:
         # single GPU main
