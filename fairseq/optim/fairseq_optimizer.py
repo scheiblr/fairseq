@@ -6,7 +6,6 @@
 import torch
 from fairseq import utils
 from fairseq.dataclass.utils import gen_parser_from_dataclass
-from collections import defaultdict
 
 
 class FairseqOptimizer(object):
