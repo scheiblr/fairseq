@@ -32,6 +32,8 @@ from fairseq.tasks import FairseqTask, register_task
 
 from .language_modeling import SAMPLE_BREAK_MODE_CHOICES, SHORTEN_METHOD_CHOICES
 
+from typing import Optional
+
 logger = logging.getLogger(__name__)
 
 
@@ -43,6 +45,10 @@ class MaskedLMConfig(FairseqDataclass):
             "help": "colon separated path to data directories list, \
                             will be iterated upon during epochs in round-robin manner"
         },
+    )
+    bpe: Optional[str] = field(
+        default="",
+        metadata={"help": "set --bpe when use mask whole words "},
     )
     sample_break_mode: SAMPLE_BREAK_MODE_CHOICES = field(
         default="none",
@@ -201,7 +207,7 @@ class MaskedLMTask(FairseqTask):
 
         # create masked input and targets
         mask_whole_words = (
-            get_whole_word_mask(self.args, self.source_dictionary)
+            get_whole_word_mask(self.cfg.bpe, self.source_dictionary)
             if self.cfg.mask_whole_words
             else None
         )
