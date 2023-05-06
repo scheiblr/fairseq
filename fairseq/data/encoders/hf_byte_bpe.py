@@ -12,8 +12,8 @@ from fairseq import file_utils
 
 @dataclass
 class HuggingFaceByteLevelBPEConfig(FairseqDataclass):
-    bpe_merges: str = field(default="???", metadata={"help": "path to merges.txt"})
-    bpe_vocab: str = field(default="???", metadata={"help": "path to vocab.json"})
+    bpe_merges: str = field(default="~/data/merges.txt", metadata={"help": "path to merges.txt"})
+    bpe_vocab: str = field(default="~/data/vocab.json", metadata={"help": "path to vocab.json"})
     bpe_add_prefix_space: bool = field(
         default=False, metadata={"help": "add prefix space before encoding"}
     )
