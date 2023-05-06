@@ -43,9 +43,14 @@ class HuggingFaceByteLevelBPE(object):
         return " ".join(map(str, self.bpe.encode(x).ids))
 
     def decode(self, x: str) -> str:
-        return self.bpe.decode(
-            [int(tok) if tok not in {"<unk>", "<mask>"} else tok for tok in x.split()]
-        )
+        try:
+            return self.bpe.decode(
+                [int(tok) if tok not in {"<unk>", "<mask>"} else tok for tok in x.split()]
+            )
+        except:
+            print(x.split())
+        
+        return self.bpe.decode(x.split())
 
     def is_beginning_of_word(self, x: str) -> bool:
         return self.decode(x).startswith(" ")
