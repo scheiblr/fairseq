@@ -8,12 +8,13 @@ from dataclasses import dataclass, field
 from fairseq.data.encoders import register_bpe
 from fairseq.dataclass import FairseqDataclass
 from fairseq import file_utils
+import os
 
 
 @dataclass
 class HuggingFaceByteLevelBPEConfig(FairseqDataclass):
-    bpe_merges: str = field(default="~/data/clean/merges.txt", metadata={"help": "path to merges.txt"})
-    bpe_vocab: str = field(default="~/data/clean/vocab.json", metadata={"help": "path to vocab.json"})
+    bpe_merges: str = field(default=os.environ.get("BPE_MERGES"), metadata={"help": "path to merges.txt"})
+    bpe_vocab: str = field(default=os.environ.get("BPE_VOCAB"), metadata={"help": "path to vocab.json"})
     bpe_add_prefix_space: bool = field(
         default=False, metadata={"help": "add prefix space before encoding"}
     )
