@@ -4,7 +4,7 @@
 # LICENSE file in the root directory of this source tree.
 
 from fairseq.data.encoders import register_bpe
-
+from fairseq import file_utils
 
 @register_bpe('hf_byte_bpe')
 class HuggingFaceByteLevelBPE(object):
@@ -27,9 +27,12 @@ class HuggingFaceByteLevelBPE(object):
                 'pip install tokenizers'
             )
 
+        bpe_vocab = file_utils.cached_path(args.bpe_vocab)
+        bpe_merges = file_utils.cached_path(args.bpe_merges)
+
         self.bpe = ByteLevelBPETokenizer(
-            args.bpe_vocab,
-            args.bpe_merges,
+            bpe_vocab,
+            bpe_merges,
             add_prefix_space=getattr(args, 'bpe_add_prefix_space', False),
         )
 
