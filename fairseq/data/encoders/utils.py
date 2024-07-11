@@ -18,6 +18,9 @@ def get_whole_word_mask(args, dictionary):
             if tok.startswith('madeupword'):
                 return True
             try:
+                
+                # print(f"{bpe.decode(tok)} ({tok}): {bpe.is_beginning_of_word(tok)}")
+                
                 return bpe.is_beginning_of_word(tok)
             except ValueError:
                 return True
