@@ -4,6 +4,8 @@ This is an old version of fairseq which works on TPUv3, TPUv4 and on NVIDIA GPUs
 
 ## Installation
 
+**NOTE**: This software was used with Python 3.8 and not tested with newer Python versions, yet.
+
 After checking out the repo, cd into the dir and execute the following commands:
 ```
 pip install .
