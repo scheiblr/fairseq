@@ -44,8 +44,9 @@ def DistributedFairseqModel(args, model, process_group=None):
             process_group=process_group,
         )
         # Maintain backward compatibility
-        if 'check_reduction' in inspect.getfullargspec(ddp_class)[0]:
-            init_kwargs['check_reduction'] = True
+        # commented out as check_reduction is deprecated
+        # if 'check_reduction' in inspect.getfullargspec(ddp_class)[0]:
+        #     init_kwargs['check_reduction'] = True
         if 'find_unused_parameters' in inspect.getfullargspec(ddp_class)[0]:
             init_kwargs['find_unused_parameters'] = args.find_unused_parameters
     elif args.distributed_wrapper == 'DDP' and args.ddp_backend == 'no_c10d':
